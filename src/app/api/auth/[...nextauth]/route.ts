@@ -15,14 +15,10 @@ const authOptions: NextAuthOptions = {
     },
     callbacks: {
         async signIn({ profile }) {
-            console.log("Profile from Google:", profile);
             return true; // don't throw errors
         },
         async session({ session, token }) {
-            console.log('Session Callback - Token:', token)
-            console.log('Session Callback - Session:', session)
-
-            return session
+         return session
         },
     },
 

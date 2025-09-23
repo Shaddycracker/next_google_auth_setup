@@ -4,18 +4,18 @@ import { useSession, signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { LogOut, User, Mail } from "lucide-react"
+import { signIn } from "next-auth/react";
 
 export function DashboardContent() {
   const { data: session, status } = useSession()
-
-  if (status === "loading" || !session) {
+  if (status === "loading") {
     return (
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             {/* Loading skeleton for header */}
             <div className="mb-8">
-              <div className="h-10 w-64 bg-muted animate-pulse rounded-lg"> ...visit /api/auth/signin </div>
+              <div className="h-10 w-64 bg-muted animate-pulse rounded-lg"> </div>
             </div>
 
             {/* Loading skeleton for cards */}
@@ -42,6 +42,19 @@ export function DashboardContent() {
           </div>
         </div>
       </div>
+    )
+  }
+  if (!session) {
+    return (<div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+
+      <button
+        type="button"
+        onClick={() => signIn("google", { callbackUrl: "/" })}
+        className="w-full relative px-8 py-4 font-bold text-gray-300 rounded-full border border-gray-600 bg-gray-800 transition-all duration-300 hover:bg-gray-700 hover:text-white active:scale-95"
+      >
+        Continue with Google
+      </button>
+    </div>
     )
   }
 

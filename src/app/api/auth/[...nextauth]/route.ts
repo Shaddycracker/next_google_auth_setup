@@ -24,7 +24,8 @@ const authOptions: NextAuthOptions = {
 
             return session
         },
-    }
+    },
+
 }
 
 const handler = NextAuth(authOptions)
